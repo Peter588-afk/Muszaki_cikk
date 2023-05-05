@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "muszaki-webshop-2023": {
+      "hosting": {
+        "Muszaki_cikk": [
+          "muszaki-webshop-2023"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "muszaki-webshop-2023"
+  }
+}

@@ -1,0 +1,50 @@
+<mat-toolbar class="max-w-10xl border-x justify-between mx-auto">
+    <a routerLink="/home">Muszaki cikk webshop</a>
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="loggedInUser">
+        <mat-icon [matBadge]="itemsQuantity" [matBadgeHidden]="!itemsQuantity" matBadgeColor="warn">
+            shopping_cart
+        </mat-icon>
+    </button>
+    <button routerLink="profil" *ngIf="loggedInUser">
+        <mat-icon>
+            account_circle
+        </mat-icon>
+    </button>
+    <button routerLink="admin" *ngIf="isLoggedInAsAdmin()">
+        <mat-icon>
+            admin_panel_settings
+        </mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <div class="p-3 divide-y divide-solid">
+            <div class="pb-3 fley justify-between">
+                <span class="mr-16">Termekek: {{itemsQuantity}}</span>
+                <a routerLink="cart">View cart</a>
+            </div>
+            <div *ngIf="cart.items.length" class="py-3">
+                <div *ngFor="let item of cart.items" class="flex justify-between font-light mb-2">
+                    {{item.name}} x {{item.quantity}}
+                    <span class="font-bold">{{item.price | currency:'HUF'}}</span>
+                </div>
+            </div>
+            <div class="flex justify-between py-3 font-light">
+                Total:
+                <span class="font-bold">{{getTotal(cart.items) | currency:'HUF'}}</span>
+            </div>
+            <div class="pt-3 flex justify-between">
+                <button (click)="onClearCart()" class="bg-rose-600 text-white rounded-full w-9 h-9">
+                    <mat-icon>remove_shopping_cart</mat-icon>
+                </button>
+                <button routerLink="cart" class="bg-green-600 text-white rounded-full w-9 h-9">
+                    <mat-icon>shopping_cart</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-menu>
+
+    <button mat-button routerLink="/login" *ngIf="!(loggedInUser)"><mat-icon>login</mat-icon>Bejelentkezés</button>
+    
+    <button mat-button routerLink="/login" *ngIf="loggedInUser" (click)="logout()"><mat-icon>logout</mat-icon>Kijelentkezés</button>
+    <button mat-button routerLink="/register" *ngIf="!(loggedInUser)"><mat-icon>app_registration</mat-icon>Regisztráció</button>
+
+</mat-toolbar>

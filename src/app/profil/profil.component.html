@@ -1,0 +1,56 @@
+<div *ngIf="currentUser$ | async as currentUser" class="test-center">
+    <h1>Üdv a profilodon: {{ currentUser.name.firstname }} {{ currentUser.name.lastname }}</h1>
+    <p>Email: {{ currentUser.email }}</p>
+    <p>Username: {{ currentUser.username }}</p>
+    <p>firstname: {{ currentUser.name.firstname }}</p>
+    <p>lastname: {{ currentUser.name.lastname }}</p>
+  </div>
+
+  <div
+  class="form-container mat-elevation-z5 text-center"
+  *ngIf="currentUser$ | async as currentUser"
+>
+  <h1>Update Profile</h1>
+
+  <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+    <div class="row">
+      <div formGroupName="name" class="subForm">
+        <mat-form-field>
+            <mat-label for="firstname">First name: </mat-label>
+            <input matInput type="text" formControlName="firstname" />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label for="firstname">Last name: </mat-label>
+            <input matInput type="text" formControlName="lastname" />
+        </mat-form-field>
+    </div>
+    </div>
+    <div class="row">
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          formControlName="email"
+          placeholder="email"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          formControlName="username"
+          placeholder="Display Name"
+        />
+      </mat-form-field>
+    </div>
+    
+    
+
+    <button type="submit" class="margin-top" mat-raised-button color="primary">
+      Save
+    </button>
+  </form>
+</div>
